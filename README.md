@@ -23,7 +23,6 @@ This application enables users to extract text from images captured using the de
 - **Optical Character Recognition (OCR):** Utilized for extracting text from images.
 - **Text-to-Speech (TTS) Conversion:** Implemented for converting extracted text into audible speech.
 - **Image Cropping:** Integrated cropping functionality for focusing on specific text regions.
-- **Mobile Development:** Built for Android/iOS platforms using [Technology/Framework Name].
 
 ## Preview
 <img src="https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/ab81eb3d-0088-4cc2-82bb-3358ff353efa" width="250" height="400">
