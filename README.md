@@ -26,6 +26,11 @@ This application enables users to extract text from images captured using the de
 - **Mobile Development:** Built for Android/iOS platforms using [Technology/Framework Name].
 
 ## Preview
-<img src="[https://cloud.githubusercontent.com/assets/yourgif.gif](https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/4f736fe0-a45a-4067-bb6b-967b5b7c61be
-)
-" width="400" height="790">
+<img src="https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/ab81eb3d-0088-4cc2-82bb-3358ff353efa" width="250" height="400">
+---
+<img src="https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/481d89ba-5c51-4f91-8563-901dfe9405ad" width="250" height="400">
+<br/><br/>
+
+<img src="https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/3a425561-95a2-4403-a81b-2e55828bca05" width="250" height="400">
+---
+<img src="https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/b4baa9db-22f6-4b52-87a5-154ff26ab56c" width="250" height="400">
