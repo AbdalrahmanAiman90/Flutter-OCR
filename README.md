@@ -26,4 +26,5 @@ This application enables users to extract text from images captured using the de
 - **Mobile Development:** Built for Android/iOS platforms using [Technology/Framework Name].
 
 ## Preview
-![App Screenshot](app_screenshot.png){:height="150px"}
+![App Screenshot](app_screensh![WhatsApp Image 2024-03-18 at 05 12 16_2f9a4884](https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/ff0ec908-5512-4d5d-971d-9e7ad9771364)
+ot.png){:height="50px"}
