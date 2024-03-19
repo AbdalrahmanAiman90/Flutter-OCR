@@ -1,7 +1,7 @@
 import 'package:extract_text/screens/recognize_page.dart';
 import 'package:extract_text/widget/image_crop.dart';
 import 'package:extract_text/widget/image_picker.dart';
-import 'package:extract_text/widget/mnodel_dialog.dart';
+import 'package:extract_text/widget/model_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -53,8 +53,10 @@ class _MyHomePageState extends State<MyHomePage> {
           imagePickerModal(
             context,
             onCameraTap: () {
+              //pick image and return path image
               pickImage(source: ImageSource.camera).then((value) {
                 if (value != '') {
+                  //crop image and retern path crop image
                   imageCropperView(value, context).then((value) {
                     if (value != '') {
                       Navigator.push(

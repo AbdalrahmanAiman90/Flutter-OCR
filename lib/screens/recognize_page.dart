@@ -1,7 +1,9 @@
 import 'dart:developer';
-import 'package:flutter_tts/flutter_tts.dart';
+
+import 'package:extract_text/const.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
 
 class RecognizePage extends StatefulWidget {
   final String? path;
@@ -12,19 +14,16 @@ class RecognizePage extends StatefulWidget {
 }
 
 class _RecognizePageState extends State<RecognizePage> {
-  // i want to show circalerindidictor
   bool _isBusy = false;
-// the text will extract from image
-  String controller = '';
-// instance to speech
-  FlutterTts tt = FlutterTts();
+  String textAfterTranslate = '';
+  String textBeforTranslate = '';
+
+  FlutterTts tts = FlutterTts();
 
   @override
   void initState() {
     super.initState();
-
     final InputImage inputImage = InputImage.fromFilePath(widget.path!);
-
     processImage(inputImage);
   }
 
@@ -32,16 +31,16 @@ class _RecognizePageState extends State<RecognizePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("recognized page"),
+        title: const Text("Translation page"),
       ),
-      body: _isBusy == true
+      body: _isBusy
           ? const Center(
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(20),
-                child: SelectableText(controller),
+                child: SelectableText(textAfterTranslate),
               ),
             ),
       floatingActionButton: Column(
@@ -49,19 +48,15 @@ class _RecognizePageState extends State<RecognizePage> {
         children: [
           FloatingActionButton.extended(
             onPressed: () {
-              tt.pause();
+              tts.pause();
             },
             label: Icon(Icons.pause),
           ),
-          SizedBox(
-            height: 15,
-          ),
+          SizedBox(height: 15),
           FloatingActionButton.extended(
-            onPressed: () {
-              if (controller != '') {
-                tt.setLanguage('en-US');
-                tt.speak(controller);
-              }
+            onPressed: () async {
+              //!function play the text after translate
+              await play(language: "ja-JP", tts: tts, text: textAfterTranslate);
             },
             label: Icon(Icons.play_arrow),
           ),
@@ -70,9 +65,10 @@ class _RecognizePageState extends State<RecognizePage> {
     );
   }
 
+//function to extract text
   void processImage(InputImage image) async {
     final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
-
+    String translateControllar = "";
     setState(() {
       _isBusy = true;
     });
@@ -81,9 +77,13 @@ class _RecognizePageState extends State<RecognizePage> {
     final RecognizedText recognizedText =
         await textRecognizer.processImage(image);
 
-    controller = recognizedText.text;
+    textBeforTranslate = recognizedText.text;
+    //!function to translate text extract from image
+    translateControllar =
+        await translat(from: "en", to: "ja", text: textBeforTranslate);
 
-    ///End busy state
+    textAfterTranslate = translateControllar;
+
     setState(() {
       _isBusy = false;
     });
