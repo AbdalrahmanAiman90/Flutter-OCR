@@ -1,30 +1,39 @@
-import 'dart:developer';
-
-import 'package:extract_text/const.dart';
+import 'package:extract_text/cubit/selct_language_cubit.dart';
+import 'package:extract_text/helpfunction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 
 class RecognizePage extends StatefulWidget {
-  final String? path;
-  const RecognizePage({Key? key, this.path}) : super(key: key);
+  final String path;
+  final SelctLanguageCubit cubit;
+  const RecognizePage({Key? key, required this.path, required this.cubit})
+      : super(key: key);
 
   @override
   State<RecognizePage> createState() => _RecognizePageState();
 }
 
 class _RecognizePageState extends State<RecognizePage> {
-  bool _isBusy = false;
-  String textAfterTranslate = '';
-  String textBeforTranslate = '';
+  bool _isBusy = true;
 
   FlutterTts tts = FlutterTts();
 
   @override
   void initState() {
     super.initState();
-    final InputImage inputImage = InputImage.fromFilePath(widget.path!);
-    processImage(inputImage);
+    final InputImage inputImage = InputImage.fromFilePath(widget.path);
+
+    processImage(inputImage).then((value) async {
+      if (value == "") {
+        value = "You have not selected any text";
+      }
+      await widget.cubit.translat(text: value);
+      //translat(from: "de", to: "ja", text: value);
+      setState(() {
+        _isBusy = false;
+      });
+    });
   }
 
   @override
@@ -40,7 +49,7 @@ class _RecognizePageState extends State<RecognizePage> {
           : SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(20),
-                child: SelectableText(textAfterTranslate),
+                child: SelectableText(widget.cubit.textAftertrans!),
               ),
             ),
       floatingActionButton: Column(
@@ -56,7 +65,10 @@ class _RecognizePageState extends State<RecognizePage> {
           FloatingActionButton.extended(
             onPressed: () async {
               //!function play the text after translate
-              await play(language: "ja-JP", tts: tts, text: textAfterTranslate);
+              await play(
+                  language: widget.cubit.tolanguage ?? "en",
+                  tts: tts,
+                  text: widget.cubit.textAftertrans!);
             },
             label: Icon(Icons.play_arrow),
           ),
@@ -66,26 +78,4 @@ class _RecognizePageState extends State<RecognizePage> {
   }
 
 //function to extract text
-  void processImage(InputImage image) async {
-    final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
-    String translateControllar = "";
-    setState(() {
-      _isBusy = true;
-    });
-
-    log(image.filePath!);
-    final RecognizedText recognizedText =
-        await textRecognizer.processImage(image);
-
-    textBeforTranslate = recognizedText.text;
-    //!function to translate text extract from image
-    translateControllar =
-        await translat(from: "en", to: "ja", text: textBeforTranslate);
-
-    textAfterTranslate = translateControllar;
-
-    setState(() {
-      _isBusy = false;
-    });
-  }
 }

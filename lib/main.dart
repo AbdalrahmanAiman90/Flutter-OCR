@@ -1,9 +1,13 @@
+import 'package:extract_text/cubit/selct_language_cubit.dart';
 import 'package:extract_text/screens/recognize_page.dart';
+import 'package:extract_text/widget/droupdowento.dart';
+import 'package:extract_text/widget/droupdownfrom.dart';
 import 'package:extract_text/widget/image_crop.dart';
 import 'package:extract_text/widget/image_picker.dart';
 import 'package:extract_text/widget/model_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() {
@@ -16,8 +20,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
+    return BlocProvider(
+      create: (context) => SelctLanguageCubit(),
+      child: const MaterialApp(
+        home: MyHomePage(),
+      ),
     );
   }
 }
@@ -32,17 +39,61 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    var cubit = BlocProvider.of<SelctLanguageCubit>(context);
+
     return Scaffold(
       appBar: AppBar(),
-      body: const Center(
+      body: Padding(
+        padding: const EdgeInsets.all(30),
         child: Padding(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.only(top: 30),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'Application for pick image and extract the text and speech this text',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              const Text(
+                'Translartion ',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "From :",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        DropdownMenuLanguageFrom(),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "To :",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        DroupDownLangageTo(),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -64,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         CupertinoPageRoute(
                           builder: (_) => RecognizePage(
                             path: value,
+                            cubit: cubit,
                           ),
                         ),
                       );
@@ -83,6 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         CupertinoPageRoute(
                           builder: (_) => RecognizePage(
                             path: value,
+                            cubit: cubit,
                           ),
                         ),
                       );
@@ -93,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           );
         },
-        label: Text("scan photo"),
+        label: const Text("scan photo"),
       ),
     );
   }
