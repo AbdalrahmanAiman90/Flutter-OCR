@@ -21,8 +21,8 @@ class SelctLanguageCubit extends Cubit<SelctLanguageState> {
 
     final translator = GoogleTranslator();
     log("${text}");
-    log("${fromlanguage}");
-    log("${tolanguage}");
+    log("cubit from:${fromlanguage}");
+    log("cubit to:${tolanguage}");
 
     try {
       var textTranslation = await translator.translate(text,
