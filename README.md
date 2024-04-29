@@ -1,8 +1,8 @@
-# Text-to-Speech Image Reader
+# Text-to-Speech and Translate Image Reader
 
 ## Description
 
-This application enables users to extract text from images captured using the device's camera or from the gallery. It utilizes advanced Optical Character Recognition (OCR) technology to convert text within images into digital text format. Additionally, users can convert the extracted text into speech for auditory playback, catering to individuals with visual impairments or those who prefer audio-based interaction.
+This repository contains the source code for an innovative application that allows users to extract text from images and translate it into any language and speech the text to language  of their choice. Leveraging advanced image processing techniques and powerful translation APIs, this app provides a seamless and intuitive way to bridge language barriers
 
 ## Key Features
 
@@ -10,7 +10,7 @@ This application enables users to extract text from images captured using the de
 - **Image Cropping:** Crop images to focus on specific text regions for more accurate extraction.
 - **OCR Technology:** Accurately extracts text from images using advanced Optical Character Recognition.
 - **Text-to-Speech:** Convert extracted text into speech for auditory playback.
-
+- **Text-to-translate:** translate text for the language that user choose.
 
 ## How to Use
 
@@ -24,12 +24,4 @@ This application enables users to extract text from images captured using the de
 - **Text-to-Speech (TTS) Conversion:** Implemented for converting extracted text into audible speech.
 - **Image Cropping:** Integrated cropping functionality for focusing on specific text regions.
 
-## Preview
-<img src="https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/ab81eb3d-0088-4cc2-82bb-3358ff353efa" width="250" height="400">
----
-<img src="https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/481d89ba-5c51-4f91-8563-901dfe9405ad" width="250" height="400">
-<br/><br/>
 
-<img src="https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/3a425561-95a2-4403-a81b-2e55828bca05" width="250" height="400">
----
-<img src="https://github.com/AbdalrahmanAiman90/Flutter-OCR/assets/75572457/b4baa9db-22f6-4b52-87a5-154ff26ab56c" width="250" height="400">
